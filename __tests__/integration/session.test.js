@@ -53,4 +53,15 @@ describe("Authentication", () => {
 
       expect(response.body).toHaveProperty('token')
   })
+
+  it('should access privated route with valid jwt token', async () => {
+    const user = await makeUser()
+    const token = await user.generateToken();
+
+    const response = await request(app)
+      .get('/dashboard')
+      .set('Authorization', `Bearer ${token}`)
+
+      expect(response.status).toBe(200);
+  })
 });
