@@ -71,4 +71,12 @@ describe("Authentication", () => {
 
       expect(response.status).toBe(401);
   })
+
+  it('should return 401 if a invalid token is provided', async () => {
+    const response = await request(app)
+      .get('/dashboard')
+      .set('Authorization', `Bearer any_invalid_token`)
+
+      expect(response.status).toBe(401);
+  })
 });
