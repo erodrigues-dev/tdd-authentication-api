@@ -64,4 +64,11 @@ describe("Authentication", () => {
 
       expect(response.status).toBe(200);
   })
+
+  it('should return 401 if without jwt token is provided', async () => {
+    const response = await request(app)
+      .get('/dashboard')
+
+      expect(response.status).toBe(401);
+  })
 });
