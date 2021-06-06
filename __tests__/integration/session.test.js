@@ -41,6 +41,19 @@ describe("Authentication", () => {
       expect(response.status).toBe(401)
   })
 
+  it('should return 401 if a invalid email is provided', async () => {
+    const user = await makeUser()
+
+    const response = await request(app)
+      .post('/sessions')
+      .send({
+        email: 'another@email.com',
+        password: '1234'
+      })
+
+      expect(response.status).toBe(401)
+  })
+
   it('should return jwt token when authenticated', async () => {
     const user = await makeUser()
 
@@ -79,4 +92,6 @@ describe("Authentication", () => {
 
       expect(response.status).toBe(401);
   })
+
+  
 });
